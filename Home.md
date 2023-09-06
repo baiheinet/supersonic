@@ -1,7 +1,7 @@
 ## 0. 项目设计思路
 
 ## 1. 系统部署和配置
-#### 1.1 [服务部署与启动](https://github.com/tencentmusic/supersonic/wiki/服务部署与启动)
+#### 1.1 [服务部署](https://github.com/tencentmusic/supersonic/wiki/服务部署与启动)
 #### 1.2 [LLM配置](https://github.com/tencentmusic/supersonic/wiki/LLM配置)
 
 ## 2. 用户使用手册
