@@ -7,7 +7,7 @@
 
 ## 2. 用户使用手册
 #### 2.1 [构建语义模型](https://github.com/tencentmusic/supersonic/wiki/构建语义建模)
-#### 2.2 [配置第三方插件](https://github.com/tencentmusic/supersonic/wiki/配置第三方插件)
+#### 2.2 [配置三方插件](https://github.com/tencentmusic/supersonic/wiki/配置第三方插件)
 #### 2.3 [配置智能助理](https://github.com/tencentmusic/supersonic/wiki/配置智能助理)
 
 ## 3. 定制开发指南
