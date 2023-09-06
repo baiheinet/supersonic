@@ -1,4 +1,6 @@
-## [1. 系统部署和配置](https://github.com/tencentmusic/supersonic/wiki/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E5%92%8C%E9%83%A8%E7%BD%B2)
+## 1. 系统部署和配置
+#### [1.1 服务部署与启动]
+(https://github.com/tencentmusic/supersonic/wiki/服务部署与启动)
 
 ## 2. 用户使用手册
 #### [2.1 构建语义模型](https://github.com/tencentmusic/supersonic/wiki/%E8%AF%AD%E4%B9%89%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C)
