@@ -3,7 +3,7 @@
 
 **配置方式**
 <div align="left" >
-    <img src=https://github.com/lxwcodemonkey/supersonic/blob/master/docs/images/nlp_config.png/>
+    <img src=https://github.com/tencentmusic/supersonic/assets/22031277/de987079-75b1-4727-9e66-a2b2ab5f1b75/>
     <p>图1-1 NPL配置文件</p>
 </div>
 
