@@ -1,6 +1,7 @@
 ## 1. 项目概览
-#### 1.1 [设计思路](https://github.com/tencentmusic/supersonic/wiki/超音数设计思路)
-#### 1.2 基本概念
+#### 1.1 为什么需要ChatBI
+#### 1.2 [超音数设计思路](https://github.com/tencentmusic/supersonic/wiki/超音数设计思路)
+#### 1.3 深入思考语义层
 
 ## 2. 系统部署配置
 #### 2.1 [服务部署](https://github.com/tencentmusic/supersonic/wiki/服务部署与启动)
