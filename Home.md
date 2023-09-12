@@ -3,7 +3,7 @@
 #### 1.2 [超音数设计思路](https://github.com/tencentmusic/supersonic/wiki/超音数设计思路)
 #### 1.3 深入思考语义层
 
-## 2. 系统部署配置
+## 2. 系统部署和启动
 #### 2.1 [服务部署](https://github.com/tencentmusic/supersonic/wiki/服务部署与启动)
 #### 2.2 [LLM配置](https://github.com/tencentmusic/supersonic/wiki/LLM配置)
 
