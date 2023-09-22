@@ -19,4 +19,4 @@
    - GPT3.5、GPT3.5-16k 均能基本满足要求，但会有输出结果不稳定的情况；GPT3.5的token长度限制为4k，在现有CoT策略下，容易出现超过长度限制的情况。
    - GPT4的输出更稳定，但费用成本远超GPT3.5，可以根据实际使用场景进行选择。
 3. Embedding模型用其他的可以吗？
-   - 可以。可以以该项目[text2vec]([URL](https://github.com/shibing624/text2vec))的榜单作为参考，然后在HuggingFace找到对应模型的model card，修改HF_TEXT2VEC_MODEL_NAME变量的取值。
+   - 可以。可以以该项目[text2vec](https://github.com/shibing624/text2vec)的榜单作为参考，然后在HuggingFace找到对应模型的model card，修改HF_TEXT2VEC_MODEL_NAME变量的取值。
