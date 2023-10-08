@@ -18,6 +18,3 @@
 ## 4. 定制开发指南
 
 后续陆续更新，如果有定制开发需求，请在社区群联系～
-
-## 5. 技术分享
-[2023 CSDI Summit：基于自然语言问答的数据服务架构实践](https://github.com/tencentmusic/supersonic/wiki/基于自然语言问答的数据服务架构实践)
