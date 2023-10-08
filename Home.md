@@ -4,9 +4,7 @@
 ## 2. 系统构建和启动
 #### 2.1 [环境依赖](https://github.com/tencentmusic/supersonic/wiki/环境依赖)
 #### 2.2 [构建和启动](https://github.com/tencentmusic/supersonic/wiki/构建和启动)
-#### 2.3 [LLM解析服务配置](https://github.com/tencentmusic/supersonic/wiki/LLM配置)
-#### 2.4 [text2sql功能相关配置](https://github.com/tencentmusic/supersonic/wiki/text2sql功能相关配置)
-
+#### 2.3 [LLM与text2sql配置](https://github.com/tencentmusic/supersonic/wiki/LLM与text2sql配置)
 
 ## 3. 用户使用手册
 #### 3.1 [构建语义模型](https://github.com/tencentmusic/supersonic/wiki/构建语义模型)
