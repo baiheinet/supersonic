@@ -3,7 +3,7 @@
 
 **配置方式**
 <div align="left" >
-    <img src=https://github.com/tencentmusic/supersonic/assets/16960390/0debae6e-52a5-460f-a038-13656ac99133/>
+    <img src=https://github.com/tencentmusic/supersonic/assets/16960390/140e36e0-f91a-453a-b0d5-ec98a568531f/>
     <p>图1-1 配置文件</p>
 </div>
 
@@ -26,6 +26,8 @@
    - GPT4的输出更稳定，但费用成本远超GPT3.5，可以根据实际使用场景进行选择。
 4. Embedding模型用其他的可以吗？
    - 可以。可以以该项目[text2vec](https://github.com/shibing624/text2vec)的榜单作为参考，然后在HuggingFace找到对应模型的model card，修改HF_TEXT2VEC_MODEL_NAME变量的取值。
+5. 启动时，首次下载Embedding模型需要会链接HuggingFace的源进行下载，如果网络不通怎么办？
+   - 可以到HuggingFace的官网找到对应的model card，然后将模型下载到本地。在supersonic/chat/core/src/main/python/config/run_config.ini 中将HF_TEXT2VEC_MODEL_NAME变量配置为模型所在的绝对路径。
 
 ### **LLM在text2sql中的应用**
 text2sql的功能实现，高度依赖对LLM的应用。通过LLM生成SQL的过程中，利用小样本(few-shots-examples)通过思维链(chain-of-thoughts)的方式对LLM in-context-learning的能力进行引导，对于生成较为稳定且符合下游语法解析规则的SQL非常重要。用户可以根据自身需要，对样本池及样本的数量进行配置，使其更加符合自身业务特点。
@@ -33,19 +35,15 @@ text2sql的功能实现，高度依赖对LLM的应用。通过LLM生成SQL的过
 #### text2sql配置方式
 1. 样本池的配置。
    - supersonic/chat/core/src/main/python/few_shot_example/sql_exampler.py 为样本池配置文件。用户可以以已有的样本作为参考，配置更贴近自身业务需求的样本，用于更好的引导LLM生成SQL。
-2. 样本数量的配置。
-   - 在 supersonic/chat/core/src/main/python/config/run_config.ini 中通过 TEXT2DSL_FEW_SHOTS_EXAMPLE_NUM 变量进行配置。
-   - 默认值为15，为项目在内部实践后较优的经验值。样本少太少，对导致LLM在生成SQL的过程中缺少引导和示范，生成的SQL会更不稳定；样本太多，会增加生成SQL需要的时间和LLM的token消耗（或超过LLM的token上限）。
-3. SQL生成方式的配置
-   - 在 supersonic/chat/core/src/main/python/config/run_config.ini 中通过 TEXT2DSL_IS_SHORTCUT 变量进行配置。
-   - 默认值为False；当为False时，会调用2次LLM生成SQL；当为True时，会只调用1次LLM生成SQL。相较于2次LLM调用生成的SQL，耗时会减少30-40%，token的消耗量会减少30%左右，但生成的SQL正确率会有所下降。
+2. SQL生成方式的配置
+   - SQL的生成方式现在目前提供3种，分别为2-steps-with-self-consistency, 2-steps, 1-step。生成SQL的正确率依次提高，耗时和token消耗量依次增加。默认采用2-steps方式，能够在SQL正确率与耗时和token消耗量间有较好的平衡。
+   - 配置方式：在supersonic/chat/core/src/main/python/config/run_config.ini 中配置。
+       * 配置 2-steps-with-self-consistency： TEXT2DSL_IS_SELF_CONSISTENCY = True，TEXT2DSL_IS_SHORTCUT = False，默认TEXT2DSL_EXAMPLE_NUM = 15
+TEXT2DSL_FEWSHOTS_NUM = 10，TEXT2DSL_SELF_CONSISTENCY_NUM = 5，增加TEXT2DSL_EXAMPLE_NUM，TEXT2DSL_FEWSHOTS_NUM， TEXT2DSL_SELF_CONSISTENCY_NUM这3个变量的数值或许能够提高生成SQL的质量，同时带来更高的成本；TEXT2DSL_FEWSHOTS_NUM必须小于等于TEXT2DSL_EXAMPLE_NUM。
+       * 配置 2-steps：该方式为默认SQL生成配置，TEXT2DSL_IS_SHORTCUT = False，TEXT2DSL_IS_SELF_CONSISTENCY = False，默认TEXT2DSL_EXAMPLE_NUM =15，增加TEXT2DSL_EXAMPLE_NUM 变量的数值或许提高生成SQL的质量，同时带来更高的成本。
+       * 配置 1-step：TEXT2DSL_IS_SHORTCUT = True，TEXT2DSL_IS_SELF_CONSISTENCY = False，默认TEXT2DSL_EXAMPLE_NUM =15，增加TEXT2DSL_EXAMPLE_NUM 变量的数值或许提高生成SQL的质量，同时带来更高的成本。
 
 #### text2sql运行中更新配置的脚本
 1. 如果在启动项目后，用户需要对text2sql功能的相关配置进行调试，可以在修改相关配置文件后，通过以下2种方式让配置在项目运行中让配置生效。
    - 执行 supersonic-daemon.sh reload llmparser 
    - 执行 python examples_reload_run.py
-
-#### text2sql FAQ
-1. 生成一个SQL需要消耗的的LLM token数量太多了，按照openAI对token的收费标准，生成一个SQL太贵了，可以少用一些token吗？
-   - 可以。 用户可以根据自身需求，如配置方式1.中所示，修改样本池中的样本，选用一些更加简短的样本。如配置方式2.中所示，减少使用的样本数量。配置方式3.中所示，只调用1次LLM生成SQL。
-   - 需要注意，样本和样本数量的选择对生成SQL的质量有很大的影响。过于激进的降低输入的token数量可能会降低生成SQL的质量。需要用户根据自身业务特点实测后进行平衡。
