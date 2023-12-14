@@ -1,5 +1,5 @@
 
-## 1. [超音数设计思路](https://github.com/tencentmusic/supersonic/wiki/超音数设计思路)
+## 1. [SuperSonic设计思路](https://github.com/tencentmusic/supersonic/wiki/超音数设计思路)
 
 ## 2. 系统构建和启动
 #### 2.1 [环境依赖](https://github.com/tencentmusic/supersonic/wiki/环境依赖)
