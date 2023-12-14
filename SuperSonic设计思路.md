@@ -18,7 +18,7 @@
 
 我们逐渐意识到，LLM只是看作是意图识别和文本生成的引擎，它还需要其他的组件来配套，才构成一个完整的系统解决方案。可与此类比的是传统OLAP引擎，需要有transformation层的清洗、关联、聚合等建模步骤来配套，才能形成高效稳定的数据服务。
 
-因此，在超音数项目中我们围绕LLM引入与之配套的工程化组件，来增强语义解析和SQL生成的可靠性。架构图里黄色背景块就是引入的配套组件，下面的篇幅将展开介绍设计思考。
+因此，在SuperSonic项目中我们围绕LLM引入与之配套的工程化组件，来增强语义解析和SQL生成的可靠性。架构图里黄色背景块就是引入的配套组件，下面的篇幅将展开介绍设计思考。
 
 <img alt="supersonic_components" src="https://github.com/tencentmusic/supersonic/assets/3949293/23b396c2-d832-430e-936d-0a23b4085aea" height="50%" width="50%" >
 
@@ -46,7 +46,7 @@
 
 Schema mapper会将所有达到匹配阈值要求的schema项及其相似度得分一并保存到info对象，传递给后续semantic parsing环节引用，最终会由parser挑选输入给LLM。
 
-与此同时，schema mapper可以定制扩展，并通过Java SPI配置的方式替换或补充超音数的默认实现。
+与此同时，schema mapper可以定制扩展，并通过Java SPI配置的方式替换或补充SuperSonic的默认实现。
 
 ### Semantic Corrector
 
@@ -54,7 +54,7 @@ Schema mapper会将所有达到匹配阈值要求的schema项及其相似度得�
 
 当前的设计方案是，从LLM生成的SQL中解析出表、字段、取值等名词，逐个检查合法性，将不合法名词通过类似schema mapping的方式去knowledge base尝试找到正确的匹配。比如，LLM可能将取值映射到了错误的字段，通过corrector尝试找到正确的字段映射，并改写SQL。
 
-与此同时，semantic corrector可以定制扩展，并通过Java SPI配置的方式替换或补充超音数的默认实现。
+与此同时，semantic corrector可以定制扩展，并通过Java SPI配置的方式替换或补充SuperSonic的默认实现。
 
 ### Rule-based Parser
 
@@ -66,11 +66,11 @@ Schema mapper会将所有达到匹配阈值要求的schema项及其相似度得�
 
 引入Semantic Parser的抽象，分别有rule-based和LLM-based的实现。输入问题首先经过rule-based parser，如果有查询意图命中，则根据启发性算法来决定是否可以跳过LLM-based parser。当前，启发性算法会根据schema mapping命中的词汇总长度除以问题总长度来判断，超过配置的阈值则认为规则可以满足需要，决定跳过LLM，如果跳过那么提升效率的目的就达到了。
 
-与此同时，semantic parser可以定制扩展，并通过Java SPI配置的方式替换或补充超音数的默认实现，也可以选择完全去掉rule-based parser配置。
+与此同时，semantic parser可以定制扩展，并通过Java SPI配置的方式替换或补充SuperSonic的默认实现，也可以选择完全去掉rule-based parser配置。
 
 ### Chat Plugin
 
-超音数的主链路主要涉及两个步骤：1、LLM解析语义，生成逻辑SQL，提交semantic layer；2、semantic layer生成物理SQL，提交底层OLAP引擎执行。但是，既然已经有了统一的ChatBI界面，是否能兼容其他的场景，比如文档知识库、数据看板，它们的执行过程不同于超音数主链路。这就是Chat Plugin组件的由来。
+SuperSonic的主链路主要涉及两个步骤：1、LLM解析语义，生成逻辑SQL，提交semantic layer；2、semantic layer生成物理SQL，提交底层OLAP引擎执行。但是，既然已经有了统一的ChatBI界面，是否能兼容其他的场景，比如文档知识库、数据看板，它们的执行过程不同于SuperSonic主链路。这就是Chat Plugin组件的由来。
 
 当前的设计方案是，三方插件可以通过WebPage（将直接IFrame嵌入展现）或者WebService（HTTP调用获取返回）两种方式来注册，后续会当作是一种工具来使用。当用户输入问题时，如何选择出合适的插件工具？经典的方式有以下两种：
 
