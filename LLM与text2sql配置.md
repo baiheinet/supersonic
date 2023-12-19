@@ -38,16 +38,6 @@ Python服务默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k�
 ### **LLM在text2sql中的应用**
 text2sql的功能实现，高度依赖对LLM的应用。通过LLM生成SQL的过程中，利用小样本(few-shots-examples)通过思维链(chain-of-thoughts)的方式对LLM in-context-learning的能力进行引导，对于生成较为稳定且符合下游语法解析规则的SQL非常重要。用户可以根据自身需要，对样本池及样本的数量进行配置，使其更加符合自身业务特点。
 
-#### text2sql配置方式
-1. 样本池的配置。
-   - supersonic/chat/core/src/main/python/few_shot_example/sql_exampler.py 为样本池配置文件。用户可以以已有的样本作为参考，配置更贴近自身业务需求的样本，用于更好的引导LLM生成SQL。
-2. SQL生成方式的配置
-   - SQL的生成方式现在目前提供3种，分别为2-steps-with-self-consistency, 2-steps, 1-step。生成SQL的正确率依次提高，耗时和token消耗量依次增加。默认采用2-steps方式，能够在SQL正确率与耗时和token消耗量间有较好的平衡。
-   - 配置方式：在supersonic/chat/core/src/main/python/config/run_config.ini 中配置。
-       * 配置 2-steps-with-self-consistency： TEXT2DSL_IS_SELF_CONSISTENCY = True，TEXT2DSL_IS_SHORTCUT = False，默认TEXT2DSL_EXAMPLE_NUM = 15
-TEXT2DSL_FEWSHOTS_NUM = 10，TEXT2DSL_SELF_CONSISTENCY_NUM = 5，增加TEXT2DSL_EXAMPLE_NUM，TEXT2DSL_FEWSHOTS_NUM， TEXT2DSL_SELF_CONSISTENCY_NUM这3个变量的数值或许能够提高生成SQL的质量，同时带来更高的成本；TEXT2DSL_FEWSHOTS_NUM必须小于等于TEXT2DSL_EXAMPLE_NUM。
-       * 配置 2-steps：该方式为默认SQL生成配置，TEXT2DSL_IS_SHORTCUT = False，TEXT2DSL_IS_SELF_CONSISTENCY = False，默认TEXT2DSL_EXAMPLE_NUM =15，增加TEXT2DSL_EXAMPLE_NUM 变量的数值或许提高生成SQL的质量，同时带来更高的成本。
-       * 配置 1-step：TEXT2DSL_IS_SHORTCUT = True，TEXT2DSL_IS_SELF_CONSISTENCY = False，默认TEXT2DSL_EXAMPLE_NUM =15，增加TEXT2DSL_EXAMPLE_NUM 变量的数值或许提高生成SQL的质量，同时带来更高的成本。
 
 #### text2sql运行中更新配置的脚本
 1. 如果在启动项目后，用户需要对text2sql功能的相关配置进行调试，可以在修改相关配置文件后，通过以下2种方式让配置在项目运行中让配置生效。
