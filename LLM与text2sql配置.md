@@ -1,10 +1,16 @@
+语言模型的使用是超音数的重要一环。能显著增强对用户的问题的理解能力，是通过对话形式与用户交互的基石之一。在本项目中对语言模型能力的应用主要在 LLM 和 Embedding 两方面, 且支持Java和Python两种访问语言模型的方式, 下面分别介绍这两种访问方式的配置。
+## JavaLLMProxy
+服务默认启动方式就为Java访问语言模型的方式, 语言模型相关配置可直接通过YAML文件来配置, 目前在配置中支持配置访问open-ai的key和LLM模型的名称
+
+
+## PythonLLMProxy
 ### **LLM作用简介**
-语言模型的使用是超音数的重要一环。能显著增强对用户的问题的理解能力，是通过对话形式与用户交互的基石之一。在本项目中对语言模型能力的应用主要在 LLM 和 Embedding 两方面;默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k，Embedding模型选用开源模型 GanymedeNil/text2vec-large-chinese。用户可以根据自己实际需求进行配置更改。
+默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k，Embedding模型选用开源模型 GanymedeNil/text2vec-large-chinese。用户可以根据自己实际需求进行配置更改。
 
 **配置方式**
 <div align="left" >
-    <img src=https://github.com/tencentmusic/supersonic/assets/16960390/140e36e0-f91a-453a-b0d5-ec98a568531f/>
-    <p>图1-1 配置文件</p>
+    <img src=https://github.com/tencentmusic/supersonic/assets/16960390/140e36e0-f91a-453a-b0d5-ec98a568531f  width="60%"  height="60%"/>
+    <p>图2-1 配置文件</p>
 </div>
 
 #### LLM模型的配置
