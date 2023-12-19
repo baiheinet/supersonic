@@ -4,7 +4,8 @@
 
 
 ## PythonLLMProxy
-默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k，Embedding模型选用开源模型 GanymedeNil/text2vec-large-chinese。用户可以根据自己实际需求进行配置更改。
+Python访问LLM的方式需要通过`sh assembly/bin/supersonic-daemon.sh start pyllm`来启动Python服务, 该命令同时也会启动Java服务, 但通过Python服务来访问LLM。
+Python服务默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k，Embedding模型选用开源模型 GanymedeNil/text2vec-large-chinese。用户可以根据自己实际需求进行配置更改。
 
 **配置方式**
 <div align="left" >
