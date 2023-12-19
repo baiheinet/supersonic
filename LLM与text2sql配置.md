@@ -4,7 +4,6 @@
 
 
 ## PythonLLMProxy
-### **LLM作用简介**
 默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k，Embedding模型选用开源模型 GanymedeNil/text2vec-large-chinese。用户可以根据自己实际需求进行配置更改。
 
 **配置方式**
