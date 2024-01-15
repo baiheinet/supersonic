@@ -1,14 +1,17 @@
 语言模型的使用是SuperSonic的重要一环。能显著增强对用户的问题的理解能力，是通过对话形式与用户交互的基石之一。在本项目中对语言模型能力的应用主要在 LLM 和 Embedding 两方面, 且支持Java和Python两种访问语言模型的方式, 下面分别介绍这两种访问方式的配置。
 ## JavaLLMProxy
 服务默认启动方式就为Java访问语言模型的方式, 语言模型相关配置可直接通过YAML文件来配置, 目前在配置中支持配置访问open-ai的key和LLM模型的名称
-
+<div align="center" >
+    <img src=https://github.com/tencentmusic/supersonic/assets/22031277/adf3d3e0-da32-4d7c-9841-074e7fb6327d  width="60%"  height="60%"/>
+    <p>图1-1 配置文件</p>
+</div>
 
 ## PythonLLMProxy
 Python访问LLM的方式需要通过`sh assembly/bin/supersonic-daemon.sh start pyllm`来启动Python服务, 该命令同时也会启动Java服务, 但通过Python服务来访问LLM。
 Python服务默认使用的模型中，LLM选用闭源模型 gpt-3.5-turbo-16k，Embedding模型选用开源模型 GanymedeNil/text2vec-large-chinese。用户可以根据自己实际需求进行配置更改。
 
 **配置方式**
-<div align="left" >
+<div align="center" >
     <img src=https://github.com/tencentmusic/supersonic/assets/16960390/140e36e0-f91a-453a-b0d5-ec98a568531f  width="60%"  height="60%"/>
     <p>图2-1 配置文件</p>
 </div>
